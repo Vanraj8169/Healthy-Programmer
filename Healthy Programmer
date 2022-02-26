@@ -1,0 +1,91 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+from time import time
+from datetime import datetime
+myobj = datetime.now()
+def water():
+    from pygame import mixer
+    mixer.init()
+    mixer.music.load("water.mp3")
+    mixer.music.play()
+    stopper = "Drank water"
+    while(True):
+        a = input("Type 'Drank water' to stop the reminder: ")
+        if(a==stopper):
+            mixer.music.stop()
+            break
+    return a
+def eyes():
+    from pygame import mixer
+    mixer.init()
+    mixer.music.load("eyes.mp3")
+    mixer.music.play()
+    stopper = "Relaxed"
+    while(True):
+        a = input("Type 'Relaxed' to stop the reminder: ")
+        if (a==stopper):
+            mixer.music.stop()
+            break
+    return a
+def physicalactivity():
+    from pygame import mixer
+    mixer.init()
+    mixer.music.load("physicalactivity.mp3")
+    mixer.music.play()
+    stopper = "Done Physical activity"
+    while (True):
+        a = input("Type 'Done Physical activity' to stop the reminder: ")
+        if (a == stopper):
+            mixer.music.stop()
+            break
+    return a
+
+format = '%H:%M:%S'
+now = (myobj.now()).strftime(format) #This will print the time in Hour minute and second format
+
+def log():
+    a = 9
+    b = 17
+    glass = 0
+    initwater = time()
+    initeyes = time()
+    initactivity = time()
+    watersecs = 1
+    eyessecs = 2
+    activitysecs = 3
+    while(True):
+        if(myobj.hour>=a and myobj.hour<=b):
+            if(time()-initwater>watersecs):
+                print("Water Drinking time\n")
+                f = open("water.txt","a")
+                data = water()
+                initwater = time()
+                f.write(f"{data} at {myobj.now()}\n")
+                glass+=1
+                f.close()
+                if(glass == 17):
+                    print("Congratulations !! You have drank 3.5 litre of water \n")
+
+            if(time()-initeyes>eyessecs):
+                print("Eyes Exercise time\n")
+                f = open("eyes.txt","a")
+                data = eyes()
+                initeyes=time()
+                f.write(f"{data} at {myobj.now()}\n")
+                f.close()
+            if (time() - initactivity > activitysecs):
+                print("Physical Exercise time\n")
+                f = open("physicalactivity.txt", "a")
+                data = physicalactivity()
+                initactivity = time()
+                f.write(f"{data} at {myobj.now()}\n")
+                f.close()
+        else:
+            print("Sorry !! This only works from 9am to 5pm")
+
+
+if __name__ == '__main__':
+    log()
+
+
+
