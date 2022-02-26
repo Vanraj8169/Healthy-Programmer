@@ -50,9 +50,9 @@ def log():
     initwater = time()
     initeyes = time()
     initactivity = time()
-    watersecs = 1
-    eyessecs = 2
-    activitysecs = 3
+    watersecs = 1644
+    eyessecs = 1800
+    activitysecs = 2700
     while(True):
         if(myobj.hour>=a and myobj.hour<=b):
             if(time()-initwater>watersecs):
